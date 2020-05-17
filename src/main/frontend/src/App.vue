@@ -18,6 +18,7 @@
       <login-form v-if="registering == false" @login="login($event)"></login-form>
       <login-form v-else @login="register($event)"
                   button-label="Zarejestruj się"></login-form>
+      <textarea v-if="registering==true && userExists == true"> Nazwa użytkownika zajęta.</textarea>
     </div>
   </div>
 </template>
@@ -32,7 +33,8 @@
         data() {
             return {
                 authenticatedUsername: "",
-                registering: false
+                registering: false,
+                userExists: false
             };
         },
         methods: {
@@ -43,9 +45,11 @@
               this.$http.post('participants', user)
                       .then(response => {
                         // udało się
+                        this.userExists = false;
                       })
                       .catch(response => {
                         // nie udało sie
+                        this.userExists = true;
                       });
             },
             logout() {
