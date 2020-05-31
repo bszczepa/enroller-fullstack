@@ -14,27 +14,27 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                newMeeting: {participants: []},
-                adding: false,
-                error: false
-            };
-        },
-        methods: {
-            addNewMeeting() {
-                this.error = false;
-                if (this.newMeeting.title) {
-                    this.$emit('added', this.newMeeting);
-                    this.newMeeting = {participants: []};
-                    this.adding = false;
-                } else {
-                    this.error = true;
-                }
-            }
+  export default {
+    data() {
+      return {
+        newMeeting: {participants: []},
+        adding: false,
+        error: false
+      };
+    },
+    methods: {
+      addNewMeeting() {
+        this.error = false;
+        if (this.newMeeting.title) {
+          this.$emit('added', this.newMeeting);
+          this.newMeeting = {participants: []};
+          this.adding = false;
+        } else {
+          this.error = true;
         }
+      }
     }
+  }
 </script>
 
 <style scoped>

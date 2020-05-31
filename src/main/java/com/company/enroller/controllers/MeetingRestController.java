@@ -37,7 +37,7 @@ public class MeetingRestController {
         }
 
         meetingService.add(meeting);
-        return new ResponseEntity<Meeting>(meeting, HttpStatus.CREATED);
+        return new ResponseEntity<>(meeting, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{id}")
@@ -48,7 +48,7 @@ public class MeetingRestController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
+        return new ResponseEntity<>(meeting, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -111,7 +111,7 @@ public class MeetingRestController {
 
         foundMeeting.addParticipant(foundParticipant);
         meetingService.addParticipantToMeeting(foundMeeting);
-        return new ResponseEntity<Meeting>(foundMeeting, HttpStatus.CREATED);
+        return new ResponseEntity<Participant>(foundParticipant, HttpStatus.CREATED);
 
     }
 
