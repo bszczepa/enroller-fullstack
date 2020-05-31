@@ -31,7 +31,13 @@
         },
         methods: {
             addNewMeeting(meeting) {
-                this.meetings.push(meeting);
+                this.$http.post('meetings', meeting)
+                    .then(response => {
+                        this.meetings.push(response.body);
+                    })
+                    .catch(response => {
+                        alert('Meeting not added. Status: ' + response.status);
+                    });
             },
             addMeetingParticipant(meeting) {
                 meeting.participants.push(this.username);
@@ -42,6 +48,16 @@
             deleteMeeting(meeting) {
                 this.meetings.splice(this.meetings.indexOf(meeting), 1);
             }
+        },
+
+        mounted() {
+            this.$http.get('meetings')
+                .then(response => {
+                    this.meetings.push(response.body);
+                })
+                .catch(response => {
+                    alert('Meetings list not downloaded. Status: ' + response.status)
+                });
         }
     }
 </script>
